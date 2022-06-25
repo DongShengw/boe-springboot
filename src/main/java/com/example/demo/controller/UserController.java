@@ -59,4 +59,17 @@ public class UserController {
         Page<User> userPage = (Page<User>) userMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
         return Result.succ(userPage);
     }
+    //注册
+    @PostMapping("/register")
+    public Result register(@RequestBody User user){
+        User res = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUserName,user.getUserName()));
+        if(res != null){
+            return Result.fail(-1,"用户名重复！",null);
+        }
+        if(user.getUserPassword()==null){
+            user.setUserPassword("123456");
+        }
+        userMapper.insert(user);
+        return Result.succ(0,"注册成功",user);
+    }
 }
