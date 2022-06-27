@@ -11,6 +11,8 @@ import com.example.demo.mapper.UserMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -28,24 +30,30 @@ public class UserController {
     //新增
     @PostMapping
     public Result save(@RequestBody User user){
+        User res = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUserName,user.getUserName()));
+        if(res != null){
+            return Result.fail(-1,"用户名重复！",null);
+        }
         if(user.getUserPassword() == null){
             user.setUserPassword("123456");
         }
+        user.setUserUpdate(LocalDateTime.now());
         userMapper.insert(user);
 
-        return Result.succ(0,"注册成功",user);
+        return Result.succ(200,"添加成功",user);
     }
     //更新
     @PutMapping
     public Result update(@RequestBody User user){
+        user.setUserUpdate(LocalDateTime.now());
         userMapper.updateById(user);
-        return Result.succ(0,"更新成功",user);
+        return Result.succ(200,"更新成功",user);
     }
     //删除
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id){
         userMapper.deleteById(id);
-        return Result.succ(0,"删除成功",id);
+        return Result.succ(200,"删除成功",id);
     }
     //查询
     @GetMapping
@@ -69,7 +77,8 @@ public class UserController {
         if(user.getUserPassword()==null){
             user.setUserPassword("123456");
         }
+        user.setUserUpdate(LocalDateTime.now());
         userMapper.insert(user);
-        return Result.succ(0,"注册成功",user);
+        return Result.succ(200,"注册成功",user);
     }
 }

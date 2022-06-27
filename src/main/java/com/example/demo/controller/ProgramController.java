@@ -32,19 +32,19 @@ public class ProgramController {
     public Result save(@RequestBody Program program){
         programMapper.insert(program);
 
-        return Result.succ(0,"新增成功",program);
+        return Result.succ(200,"新增成功",program);
     }
     //更新
     @PutMapping
     public Result update(@RequestBody Program program){
         programMapper.updateById(program);
-        return Result.succ(0,"更新成功",program);
+        return Result.succ(200,"更新成功",program);
     }
     //删除
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id){
         programMapper.deleteById(id);
-        return Result.succ(0,"删除成功",id);
+        return Result.succ(200,"删除成功",id);
     }
     //查询
     @GetMapping

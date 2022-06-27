@@ -32,19 +32,19 @@ public class ScheduleExamineController {
     public Result save(@RequestBody ScheduleExamine scheduleExamine){
         scheduleExamineMapper.insert(scheduleExamine);
 
-        return Result.succ(0,"新增成功",scheduleExamine);
+        return Result.succ(200,"新增成功",scheduleExamine);
     }
     //更新
     @PutMapping
     public Result update(@RequestBody ScheduleExamine scheduleExamine){
         scheduleExamineMapper.updateById(scheduleExamine);
-        return Result.succ(0,"更新成功",scheduleExamine);
+        return Result.succ(200,"更新成功",scheduleExamine);
     }
     //删除
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id){
         scheduleExamineMapper.deleteById(id);
-        return Result.succ(0,"删除成功",id);
+        return Result.succ(200,"删除成功",id);
     }
     //查询
     @GetMapping

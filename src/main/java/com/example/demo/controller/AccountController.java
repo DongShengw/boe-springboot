@@ -53,7 +53,7 @@ public class AccountController {
     }
 
     //需要认证权限才能退出登录
-    @RequiresAuthentication
+//    @RequiresAuthentication
     @RequestMapping("/logout")
     public Result logout() {
         //退出登录
