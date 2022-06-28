@@ -36,5 +36,6 @@ public class Device implements Serializable {
 
     private String deviceSchedule;
 
+    private String deviceSystem;
 
 }
