@@ -19,6 +19,8 @@ import java.util.List;
 public interface DeviceMapper extends BaseMapper<Device> {
     @Select("select distinct device_schedule from device")
     List<String> querySchedule();
+    @Select("select distinct device_group from device")
+    List<String> queryGroup();
     @Delete("delete from device where device_id=#{id}")
     int deleteSchedule(@Param("id") Long id);
 }

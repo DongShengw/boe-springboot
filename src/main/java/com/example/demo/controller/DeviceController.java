@@ -71,8 +71,14 @@ public class DeviceController {
         Page<Device> userPage = (Page<Device>) deviceMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
         return Result.succ(userPage);
     }
+
     @GetMapping("/schedule")
     public Result getSchedule(){
         return Result.succ(deviceMapper.querySchedule());
+    }
+
+    @GetMapping("/group")
+    public Result getGroup (){
+        return Result.succ(deviceMapper.queryGroup());
     }
 }
