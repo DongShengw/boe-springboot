@@ -61,9 +61,12 @@ public class DeviceController {
         LambdaQueryWrapper<Device> wrapper =  Wrappers.<Device>lambdaQuery();
         if (StrUtil.isNotBlank(name)||StrUtil.isNotBlank(mechanism)||StrUtil.isNotBlank(group)||StrUtil.isNotBlank(mac)||StrUtil.isNotBlank(resolving)||
                 StrUtil.isNotBlank(state)||StrUtil.isNotBlank(schedule)||StrUtil.isNotBlank(system)){
-            wrapper.like(Device::getDeviceName,name).like(Device::getDeviceMechanism,mechanism).like(Device::getDeviceGroup,group)
+//            wrapper.like(Device::getDeviceName,name).like(Device::getDeviceMechanism,mechanism).like(Device::getDeviceGroup,group)
+//                    .like(Device::getMacAddress,mac).like(Device::getResolvingPower,resolving).like(Device::getDeviceState,state)
+//                    .like(Device::getDeviceSchedule,schedule).like(Device::getDeviceSystem,system);
+            wrapper.and(i->i.like(Device::getDeviceName,name).like(Device::getDeviceMechanism,mechanism).like(Device::getDeviceGroup,group)
                     .like(Device::getMacAddress,mac).like(Device::getResolvingPower,resolving).like(Device::getDeviceState,state)
-                    .like(Device::getDeviceSchedule,schedule).like(Device::getDeviceSystem,system);
+                    .like(Device::getDeviceSchedule,schedule).like(Device::getDeviceSystem,system));
         }
         Page<Device> userPage = (Page<Device>) deviceMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
         return Result.succ(userPage);
