@@ -27,6 +27,7 @@ public interface DeviceMapper extends BaseMapper<Device> {
     //删除设备
     @Delete("delete from device where device_id=#{id}")
     int deleteSchedule(@Param("id") Long id);
+    //更新设备
     @Update("update device set device_name=#{name},device_group=#{group} where device_id=#{id}")
     int updateDevice(@Param("name") String name,@Param("group") String group,@Param("id") int id);
 }

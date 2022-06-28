@@ -71,12 +71,12 @@ public class DeviceController {
         Page<Device> userPage = (Page<Device>) deviceMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
         return Result.succ(userPage);
     }
-
+    //得到计划列表
     @GetMapping("/schedule")
     public Result getSchedule(){
         return Result.succ(deviceMapper.querySchedule());
     }
-
+    //得到分组
     @GetMapping("/group")
     public Result getGroup (){
         return Result.succ(deviceMapper.queryGroup());

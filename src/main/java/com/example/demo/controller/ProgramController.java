@@ -50,10 +50,12 @@ public class ProgramController {
     @GetMapping
     public Result findPage(@RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam (defaultValue = "10") Integer pageSize,
-                           @RequestParam (defaultValue = "") String search){
+                           @RequestParam (defaultValue = "") String name,
+                           @RequestParam (defaultValue = "") String resolving,
+                           @RequestParam (defaultValue = "") String state){
         LambdaQueryWrapper<Program> wrapper =  Wrappers.<Program>lambdaQuery();
-        if (StrUtil.isNotBlank(search)){
-            wrapper.like(Program::getProgramName,search);
+        if (StrUtil.isNotBlank(name)||StrUtil.isNotBlank(resolving)||StrUtil.isNotBlank(state)){
+            wrapper.and(i->i.like(Program::getProgramName,name).like(Program::getResolvingPower,resolving).like(Program::getProgramState,state));
         }
         Page<Program> userPage = (Page<Program>) programMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
         return Result.succ(userPage);
