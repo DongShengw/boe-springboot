@@ -37,7 +37,7 @@ public class DeviceController {
     //更新
     @PutMapping
     public Result update(@RequestBody Device device){
-        deviceMapper.updateById(device);
+        deviceMapper.updateDevice(device.getDeviceName(),device.getDeviceGroup(),device.getDeviceId());
         return Result.succ(200,"更新成功",device);
     }
     //删除
