@@ -43,7 +43,7 @@ public class DeviceController {
     //删除
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id){
-        deviceMapper.deleteById(id);
+        deviceMapper.deleteSchedule(id);
         return Result.succ(200,"删除成功",id);
     }
     //查询
