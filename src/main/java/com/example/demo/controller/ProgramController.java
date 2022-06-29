@@ -13,7 +13,9 @@ import com.example.demo.mapper.UserMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -31,7 +33,10 @@ public class ProgramController {
     //新增
     @PostMapping
     public Result save(@RequestBody Program program){
-        program.setProgramUpdate(LocalDateTime.now());
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        System.out.println(formatter.format(date));
+        program.setProgramUpdate(formatter.format(date));
         programMapper.insert(program);
 
         return Result.succ(200,"新增成功",program);

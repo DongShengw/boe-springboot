@@ -40,7 +40,7 @@ public class Program implements Serializable {
 
     private String programAuthor;
 
-    private LocalDateTime programUpdate;
+    private String programUpdate;
 
 
 }
