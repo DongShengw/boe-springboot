@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Device;
+import com.example.demo.entity.Grouping;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author anonymous
- * @since 2022-06-28
+ * @since 2022-06-29
  */
-public interface DeviceService extends IService<Device> {
+public interface GroupingService extends IService<Grouping> {
 
 }
