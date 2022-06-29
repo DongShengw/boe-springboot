@@ -50,10 +50,11 @@ public class ScheduleListController {
     @GetMapping
     public Result findPage(@RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam (defaultValue = "10") Integer pageSize,
-                           @RequestParam (defaultValue = "") String search){
+                           @RequestParam (defaultValue = "") String name,
+                           @RequestParam (defaultValue = "") String state){
         LambdaQueryWrapper<ScheduleList> wrapper =  Wrappers.<ScheduleList>lambdaQuery();
-        if (StrUtil.isNotBlank(search)){
-            wrapper.like(ScheduleList::getListName,search);
+        if (StrUtil.isNotBlank(name)||StrUtil.isNotBlank(state)){
+            wrapper.and(i->i.like(ScheduleList::getListName,name).like(ScheduleList::getListState,state));
         }
         Page<ScheduleList> userPage = (Page<ScheduleList>) scheduleListMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
         return Result.succ(userPage);
