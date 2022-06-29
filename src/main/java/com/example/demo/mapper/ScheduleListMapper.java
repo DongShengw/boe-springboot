@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.entity.ScheduleList;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * <p>
@@ -12,5 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2022-06-24
  */
 public interface ScheduleListMapper extends BaseMapper<ScheduleList> {
-
+    //得到计划数量
+    @Select("select count(list_id) from schedule_list")
+    int getSum();
 }

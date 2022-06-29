@@ -60,5 +60,9 @@ public class ProgramController {
         Page<Program> userPage = (Page<Program>) programMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
         return Result.succ(userPage);
     }
-
+    //得到节目数量
+    @GetMapping("/sum")
+    public Result getSum(){
+        return Result.succ(programMapper.getSum());
+    }
 }

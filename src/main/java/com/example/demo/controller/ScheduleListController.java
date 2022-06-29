@@ -58,4 +58,9 @@ public class ScheduleListController {
         Page<ScheduleList> userPage = (Page<ScheduleList>) scheduleListMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
         return Result.succ(userPage);
     }
+    //计划总数
+    @GetMapping("/sum")
+    public Result getSum(){
+        return Result.succ(scheduleListMapper.getSum());
+    }
 }

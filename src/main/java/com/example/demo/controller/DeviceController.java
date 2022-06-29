@@ -13,6 +13,7 @@ import com.example.demo.mapper.ScheduleListMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 
 /**
  * <p>
@@ -76,9 +77,26 @@ public class DeviceController {
     public Result getSchedule(){
         return Result.succ(deviceMapper.querySchedule());
     }
+
     //得到分组
     @GetMapping("/group")
     public Result getGroup (){
         return Result.succ(deviceMapper.queryGroup());
+    }
+
+    //得到设备数量
+    @GetMapping("/sum")
+    public Result getSum(){
+        return Result.succ(deviceMapper.getSum());
+    }
+
+    //得到不同状态设备数量
+    @GetMapping("/statesum")
+    public Result getStatesum(){
+        HashMap<Integer,Integer> map=new HashMap<Integer, Integer>();
+        map.put(0,deviceMapper.getOffline());
+        map.put(1,deviceMapper.getFree());
+        map.put(2,deviceMapper.getPlay());
+        return Result.succ(map);
     }
 }

@@ -30,4 +30,18 @@ public interface DeviceMapper extends BaseMapper<Device> {
     //更新设备
     @Update("update device set device_name=#{name},device_group=#{group} where device_id=#{id}")
     int updateDevice(@Param("name") String name,@Param("group") String group,@Param("id") int id);
+    //得到设备数量
+    @Select("select count(device_id) from device")
+    int getSum();
+    //得到离线设备数量
+    @Select("select count(device_id) from device where device_state=0")
+    int getOffline();
+    //得到空闲设备数量
+    @Select("select count(device_id) from device where device_state=1")
+    int getFree();
+    //得到播放设备数量
+    @Select("select count(device_id) from device where device_state=2")
+    int getPlay();
+
+
 }
