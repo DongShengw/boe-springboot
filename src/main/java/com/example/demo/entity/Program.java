@@ -32,7 +32,7 @@ public class Program implements Serializable {
 
     private String resolvingPower;
 
-    private LocalDateTime programTime;
+    private String programTime;
 
     private String programSize;
 
