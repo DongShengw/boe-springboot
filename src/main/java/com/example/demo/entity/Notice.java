@@ -2,9 +2,6 @@ package com.example.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 import lombok.Data;
@@ -37,7 +34,7 @@ public class Notice implements Serializable {
 
     private String noticeAuthor;
 
-    private Timestamp noticeStart;
+    private LocalDateTime noticeStart;
 
 
 }
