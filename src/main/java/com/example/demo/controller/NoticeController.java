@@ -13,7 +13,7 @@ import com.example.demo.mapper.UserMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 /**
  * <p>
@@ -31,7 +31,9 @@ public class NoticeController {
     //新增
     @PostMapping
     public Result save(@RequestBody Notice notice){
-//        notice.setNoticeStart(LocalDateTime.now());
+        long startTime = System.currentTimeMillis();
+        Timestamp now1 = new Timestamp(startTime);
+        notice.setNoticeStart(now1);
         noticeMapper.insert(notice);
         return Result.succ(200,"添加成功",notice);
     }
