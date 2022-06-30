@@ -1,14 +1,17 @@
 package com.example.demo.controller;
 
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.common.Result;
 import com.example.demo.entity.Img;
+import com.example.demo.entity.Program;
 import com.example.demo.mapper.ImgMapper;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -69,7 +72,19 @@ public class ImgController {
 
         Img img = new Img();
         img.setImgUrl(url);
+        img.setImgName("text");
         imgMapper.insert(img);
         return Result.succ(200,"图片上传成功", url);
+    }
+
+    //查询
+    @GetMapping
+    public Result findPage(@RequestParam (defaultValue = "") String name){
+        LambdaQueryWrapper<Img> wrapper =  Wrappers.<Img>lambdaQuery();
+        if (StrUtil.isNotBlank(name)){
+            wrapper.and(i->i.like(Img::getImgName,name));
+        }
+        Page<Img> userPage = (Page<Img>) imgMapper.selectList(wrapper);
+        return Result.succ(userPage);
     }
 }

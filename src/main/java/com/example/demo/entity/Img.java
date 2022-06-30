@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author anonymous
@@ -22,8 +22,10 @@ public class Img implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "img_Id", type = IdType.AUTO)
+    @TableId(value = "img_id", type = IdType.AUTO)
     private Integer imgId;
+
+    private String imgName;
 
     private String imgUrl;
 
