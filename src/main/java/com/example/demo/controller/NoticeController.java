@@ -54,7 +54,7 @@ public class NoticeController {
                            @RequestParam (defaultValue = "") String search){
         LambdaQueryWrapper<Notice> wrapper =  Wrappers.<Notice>lambdaQuery();
         if (StrUtil.isNotBlank(search)){
-            wrapper.like(Notice::getNoticeContent,search);
+            wrapper.like(Notice::getNoticeState,search);
         }
         Page<Notice> userPage = (Page<Notice>) noticeMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
         return Result.succ(userPage);
