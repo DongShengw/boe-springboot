@@ -33,7 +33,6 @@ public class ProgramController {
     public Result save(@RequestBody Program program){
         program.setProgramUpdate(LocalDateTime.now());
         programMapper.insert(program);
-
         return Result.succ(200,"新增成功",program);
     }
     //更新

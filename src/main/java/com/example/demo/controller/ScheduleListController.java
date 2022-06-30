@@ -64,4 +64,10 @@ public class ScheduleListController {
     public Result getSum(){
         return Result.succ(scheduleListMapper.getSum());
     }
+
+    //前3条计划
+    @GetMapping("/schedule")
+    public Result getSchedule(){
+        return Result.succ(scheduleListMapper.getSchedule());
+    }
 }
