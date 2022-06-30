@@ -37,6 +37,7 @@ public class ImgController {
     @Resource
     ImgMapper imgMapper;
 
+    @CrossOrigin
     @PostMapping("/UploadPic")
     public Result UploadPic(MultipartFile file, HttpServletRequest request) throws FileNotFoundException {
 
@@ -71,8 +72,8 @@ public class ImgController {
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/img" + format + newName;
 
         Img img = new Img();
-        img.setImgUrl(url);
-        img.setImgName("text");
+        img.setUrl(url);
+        img.setName("text");
         imgMapper.insert(img);
         return Result.succ(200,"图片上传成功", url);
     }
@@ -82,9 +83,9 @@ public class ImgController {
     public Result findPage(@RequestParam (defaultValue = "") String name){
         LambdaQueryWrapper<Img> wrapper =  Wrappers.<Img>lambdaQuery();
         if (StrUtil.isNotBlank(name)){
-            wrapper.and(i->i.like(Img::getImgName,name));
+            wrapper.and(i->i.like(Img::getName,name));
         }
-        Page<Img> userPage = (Page<Img>) imgMapper.selectList(wrapper);
+        Page<Img> userPage = (Page<Img>) imgMapper.selectPage(new Page<>(1,20),wrapper);
         return Result.succ(userPage);
     }
 }

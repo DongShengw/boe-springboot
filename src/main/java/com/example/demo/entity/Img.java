@@ -25,9 +25,9 @@ public class Img implements Serializable {
     @TableId(value = "img_id", type = IdType.AUTO)
     private Integer imgId;
 
-    private String imgName;
+    private String name;
 
-    private String imgUrl;
+    private String url;
 
 
 }
