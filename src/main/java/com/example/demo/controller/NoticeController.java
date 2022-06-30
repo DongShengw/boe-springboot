@@ -59,5 +59,4 @@ public class NoticeController {
         Page<Notice> userPage = (Page<Notice>) noticeMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
         return Result.succ(userPage);
     }
-
 }

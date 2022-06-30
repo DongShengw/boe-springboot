@@ -13,6 +13,7 @@ import com.example.demo.mapper.ScheduleListMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -30,13 +31,14 @@ public class ScheduleListController {
     //新增
     @PostMapping
     public Result save(@RequestBody ScheduleList scheduleList){
+        scheduleList.setListUpdate(LocalDateTime.now());
         scheduleListMapper.insert(scheduleList);
-
         return Result.succ(200,"新增成功",scheduleList);
     }
     //更新
     @PutMapping
     public Result update(@RequestBody ScheduleList scheduleList){
+        scheduleList.setListUpdate(LocalDateTime.now());
         scheduleListMapper.updateById(scheduleList);
         return Result.succ(200,"更新成功",scheduleList);
     }
