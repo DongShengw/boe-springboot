@@ -18,7 +18,7 @@ public interface ScheduleListMapper extends BaseMapper<ScheduleList> {
     //得到计划数量
     @Select("select count(list_id) from schedule_list")
     int getSum();
-    //得到前3条计划
-    @Select("SELECT list_id,list_name,list_state,list_update,list_author  from schedule_list LIMIT 5")
+    //得到计划
+    @Select("SELECT list_id,list_name,list_state,list_update,list_author  from schedule_list")
     List<ScheduleList> getSchedule();
 }
