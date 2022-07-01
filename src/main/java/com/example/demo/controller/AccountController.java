@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
@@ -43,7 +44,8 @@ public class AccountController {
         //将token 放在我们的header里面
         response.setHeader("Authorization",jwt);
         response.setHeader("Access-control-Expose-Headers","Authorization");
-
+        user.setUserState(1);
+        userMapper.updateById(user);
         return Result.succ(MapUtil.builder()
                 .put("id",user.getUserId())
                 .put("username",user.getUserName())
@@ -55,8 +57,9 @@ public class AccountController {
     //需要认证权限才能退出登录
 //    @RequiresAuthentication
     @RequestMapping("/logout")
-    public Result logout() {
+    public Result logout(@RequestParam int id) {
         //退出登录
+        userMapper.setState(id);
         SecurityUtils.getSubject().logout();
         return Result.succ("退出登录成功");
     }
