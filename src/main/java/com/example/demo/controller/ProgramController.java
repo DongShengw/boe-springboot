@@ -89,6 +89,12 @@ public class ProgramController {
         programMapper.updateById(program);
         return Result.succ(200,"更新成功",program);
     }
+    //重命名
+    @PutMapping("/rename")
+    public Result reName(@RequestBody  Program program){
+        programMapper.reName(program.getProgramName(),program.getProgramId());
+        return Result.succ(200,"更新成功",program);
+    }
     //删除
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id){
