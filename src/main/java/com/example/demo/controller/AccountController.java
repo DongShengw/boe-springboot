@@ -19,12 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
 public class AccountController {
 
-    @Autowired
+    @Resource
     UserMapper userMapper;
 
     @Autowired
@@ -57,11 +58,11 @@ public class AccountController {
     //需要认证权限才能退出登录
 //    @RequiresAuthentication
     @RequestMapping("/logout")
-    public Result logout(@RequestParam int id) {
+    public Result logout(@RequestBody int id) {
         //退出登录
         userMapper.setState(id);
         SecurityUtils.getSubject().logout();
-        return Result.succ("退出登录成功");
+        return Result.succ(200,"退出登录成功","");
     }
 
 }

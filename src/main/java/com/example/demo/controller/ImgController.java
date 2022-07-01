@@ -73,7 +73,7 @@ public class ImgController {
 
         Img img = new Img();
         img.setUrl(url);
-        img.setName("text");
+        img.setName(filename.substring(0,filename.length()-4));
         imgMapper.insert(img);
         return Result.succ(200,"图片上传成功", url);
     }
@@ -87,5 +87,12 @@ public class ImgController {
         }
         Page<Img> userPage = (Page<Img>) imgMapper.selectPage(new Page<>(1,20),wrapper);
         return Result.succ(userPage);
+    }
+
+    //删除
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Long id){
+        imgMapper.deleteById(id);
+        return Result.succ(200,"删除成功",id);
     }
 }
