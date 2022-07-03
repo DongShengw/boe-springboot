@@ -32,7 +32,7 @@ public class PubNoticeController {
     @PostMapping
     public Result save(@RequestBody PubNotice pubNotice){
         pubNoticeMapper.insert(pubNotice);
-        return Result.succ(200,"添加成功",pubNotice);
+        return Result.succ(200,"发布成功",pubNotice);
     }
     //更新
     @PutMapping
@@ -56,6 +56,6 @@ public class PubNoticeController {
             wrapper.like(PubNotice::getPubNoticeContent,search);
         }
         Page<PubNotice> userPage = (Page<PubNotice>) pubNoticeMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
-        return Result.succ(userPage);
+        return Result.pubsucc(userPage);
     }
 }
