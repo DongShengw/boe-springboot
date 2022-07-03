@@ -39,7 +39,6 @@ public class ProgramController {
     @Resource
     ProgramMapper programMapper;
     //新增
-    //新增
     @PostMapping
     public Result save(@RequestBody Program program){
         program.setProgramUpdate(LocalDateTime.now());
