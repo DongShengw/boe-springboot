@@ -48,7 +48,7 @@ public class PubNoticeController {
     }
     //查询
     @GetMapping
-    public Result findPage(@RequestParam(defaultValue = "1") Integer pageNum,
+    public Object findPage(@RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam (defaultValue = "10") Integer pageSize,
                            @RequestParam (defaultValue = "") String search){
         LambdaQueryWrapper<PubNotice> wrapper =  Wrappers.<PubNotice>lambdaQuery();
@@ -56,6 +56,6 @@ public class PubNoticeController {
             wrapper.like(PubNotice::getPubNoticeContent,search);
         }
         Page<PubNotice> userPage = (Page<PubNotice>) pubNoticeMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
-        return Result.pubsucc(userPage);
+        return userPage;
     }
 }
