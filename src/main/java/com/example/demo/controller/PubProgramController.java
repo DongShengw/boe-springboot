@@ -26,23 +26,23 @@ import javax.annotation.Resource;
 @RequestMapping("/pub-program")
 public class PubProgramController {
     @Resource
-    PubProgramMapper programMapper;
+    PubProgramMapper pubProgramMapper;
     //新增
     @PostMapping
     public Result save(@RequestBody PubProgram pubProgram){
-        programMapper.insert(pubProgram);
+        pubProgramMapper.insert(pubProgram);
         return Result.succ(200,"发布成功",pubProgram);
     }
     //更新
     @PutMapping
     public Result update(@RequestBody PubProgram pubProgram){
-        programMapper.updateById(pubProgram);
+        pubProgramMapper.updateById(pubProgram);
         return Result.succ(200,"更新成功",pubProgram);
     }
     //删除
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id){
-        programMapper.deleteById(id);
+        pubProgramMapper.deleteById(id);
         return Result.succ(200,"删除成功",id);
     }
     //查询
@@ -54,7 +54,7 @@ public class PubProgramController {
         if (StrUtil.isNotBlank(search)){
             wrapper.like(PubProgram::getPubProgramId,search);
         }
-        Page<PubProgram> userPage = (Page<PubProgram>) programMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
+        Page<PubProgram> userPage = (Page<PubProgram>) pubProgramMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
         return userPage;
     }
 }
