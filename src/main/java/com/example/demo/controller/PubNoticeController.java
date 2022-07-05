@@ -56,6 +56,6 @@ public class PubNoticeController {
             wrapper.like(PubNotice::getPubNoticeContent,search);
         }
         Page<PubNotice> userPage = (Page<PubNotice>) pubNoticeMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
-        return userPage;
+        return Result.pubsucc(userPage.getRecords());
     }
 }
