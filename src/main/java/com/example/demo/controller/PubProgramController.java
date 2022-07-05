@@ -55,6 +55,6 @@ public class PubProgramController {
             wrapper.like(PubProgram::getPubProgramId,search);
         }
         Page<PubProgram> userPage = (Page<PubProgram>) pubProgramMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
-        return userPage;
+        return userPage.getRecords();
     }
 }

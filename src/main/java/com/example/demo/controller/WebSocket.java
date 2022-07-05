@@ -84,9 +84,7 @@ public class WebSocket {
         //可以群发消息
         //消息保存到数据库、redis
         if(!message.isEmpty()){
-
             try {
-
                 //解析发送的报文
                 JSONObject jsonObject = JSON.parseObject(message);
                 //追加发送人(防止串改)
@@ -105,13 +103,7 @@ public class WebSocket {
                 e.printStackTrace();
             }
         }
-
-
-
     }
-
-
-
     //新增一个方法用于主动向客户端发送消息
     public void sendMessage(String message) {
         log.info("【websocket消息】广播消息, message={}", message);
