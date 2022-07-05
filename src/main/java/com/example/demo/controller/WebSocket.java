@@ -136,7 +136,7 @@ public class WebSocket {
     public static synchronized void subOnlineCount() {
         WebSocket.onlineCount--;
     }
-    public ConcurrentHashMap<String, WebSocket>  getWebSocketMap() {
+    public static ConcurrentHashMap<String, WebSocket>  getWebSocketMap() {
         return webSocketMap;
     }
 }

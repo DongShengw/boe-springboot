@@ -13,6 +13,7 @@ import com.example.demo.mapper.PubProgramMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <p>
@@ -25,36 +26,13 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/pub-program")
 public class PubProgramController {
-    @Resource
-    PubProgramMapper pubProgramMapper;
     //新增
     @PostMapping
     public Result save(@RequestBody PubProgram pubProgram){
-        pubProgramMapper.insert(pubProgram);
-        return Result.succ(200,"发布成功",pubProgram);
-    }
-    //更新
-    @PutMapping
-    public Result update(@RequestBody PubProgram pubProgram){
-        pubProgramMapper.updateById(pubProgram);
-        return Result.succ(200,"更新成功",pubProgram);
-    }
-    //删除
-    @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Long id){
-        pubProgramMapper.deleteById(id);
-        return Result.succ(200,"删除成功",id);
-    }
-    //查询
-    @GetMapping
-    public Object findPage(@RequestParam(defaultValue = "1") Integer pageNum,
-                           @RequestParam (defaultValue = "10") Integer pageSize,
-                           @RequestParam (defaultValue = "") String search){
-        LambdaQueryWrapper<PubProgram> wrapper =  Wrappers.<PubProgram>lambdaQuery();
-        if (StrUtil.isNotBlank(search)){
-            wrapper.like(PubProgram::getPubProgramId,search);
+        ConcurrentHashMap<String, WebSocket> webSocketMap = WebSocket.getWebSocketMap();
+        for(WebSocket item :webSocketMap.values()){
+            item.sendMessage("0"+pubProgram.getPubProgramImg());
         }
-        Page<PubProgram> userPage = (Page<PubProgram>) pubProgramMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
-        return userPage.getRecords();
+        return Result.succ(200,"发布成功",pubProgram);
     }
 }
