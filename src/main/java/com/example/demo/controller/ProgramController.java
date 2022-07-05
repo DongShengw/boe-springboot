@@ -77,4 +77,9 @@ public class ProgramController {
     public Result getSum(){
         return Result.succ(programMapper.getSum());
     }
+    //改变节目状态
+    @PutMapping("/state")
+    public Result setState(@RequestBody int id){
+        return  Result.succ(programMapper.setState(id));
+    }
 }

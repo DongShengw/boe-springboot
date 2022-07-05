@@ -59,4 +59,8 @@ public class NoticeController {
         Page<Notice> userPage = (Page<Notice>) noticeMapper.selectPage(new Page<>(pageNum,pageSize),wrapper);
         return Result.succ(userPage);
     }
+    @PutMapping("/state")
+    public Result setState(@RequestBody int id){
+        return  Result.succ(noticeMapper.setState(id));
+    }
 }

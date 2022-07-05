@@ -21,4 +21,6 @@ public interface ProgramMapper extends BaseMapper<Program> {
     //重命名
     @Update("update program set program_name=#{name} where program_id=#{id}")
     int reName(@Param("name") String name,@Param("id") int id);
+    @Update("update program set program_state=2 where program_id=#{id}")
+    int setState(@Param("id") int id);
 }
