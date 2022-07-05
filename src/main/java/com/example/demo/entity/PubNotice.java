@@ -23,6 +23,7 @@ public class PubNotice implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @TableId(value = "pub_notice_id", type = IdType.AUTO)
+
     private Integer pubNoticeId;
 
     private String pubNoticeContent;
